@@ -3,8 +3,7 @@ import { Modal } from '../common/Modal';
 import type { ItemCondition } from '../../types';
 import { uploadApi } from '../../api/upload.api';
 import { getPhotoUrl } from '../../utils/photo.util';
-import { HashBadge } from '../common/HashBadge';
-import { Upload, AlertCircle } from 'lucide-react';
+import { Upload, AlertCircle, ShieldCheck } from 'lucide-react';
 
 interface AddRoomItemModalProps {
   isOpen: boolean;
@@ -218,10 +217,24 @@ export const AddRoomItemModal: React.FC<AddRoomItemModalProps> = ({ isOpen, onCl
                     style={{ width: 44, height: 44, objectFit: 'cover', borderRadius: '4px', border: '1px solid #cbd5e1' }}
                   />
                   <div style={{ flex: 1, minWidth: 0 }}>
-                    <div style={{ fontSize: '0.8rem', fontWeight: 500, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                    <div style={{ fontSize: '0.8rem', fontWeight: 600, color: '#1e293b', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                       {p.fileName}
                     </div>
-                    <HashBadge hash={p.sha256Hash} prefix="SHA-256" />
+                    <div
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '4px',
+                        color: '#059669',
+                        fontSize: '0.73rem',
+                        fontWeight: 600,
+                        marginTop: '2px',
+                      }}
+                      title={`Cryptographic SHA-256 Hash:\n${p.sha256Hash}`}
+                    >
+                      <ShieldCheck size={13} color="#059669" />
+                      <span>Tamper-Proof Encrypted</span>
+                    </div>
                   </div>
                   <button
                     type="button"

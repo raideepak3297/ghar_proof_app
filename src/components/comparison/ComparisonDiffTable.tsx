@@ -108,7 +108,7 @@ export const ComparisonDiffTable: React.FC<ComparisonDiffTableProps> = ({ compar
 
                   <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
                     <Badge variant={isDamaged ? 'damaged' : isDisputed ? 'disputed' : 'unchanged'} />
-                    {isDamaged && (
+                    {isDamaged && !comparison.moveOutLocked && (
                       <Link
                         to={`/rentals/${rentalId}/disputes`}
                         className="btn btn-danger btn-sm"

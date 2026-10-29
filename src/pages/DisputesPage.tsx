@@ -184,10 +184,28 @@ export const DisputesPage: React.FC = () => {
           </div>
 
           {role === "landlord" && (
-            <button onClick={() => setIsCreateOpen(true)} className="btn btn-primary">
-              <Plus size={16} />
-              <span>Propose New Deduction</span>
-            </button>
+            rental.status === "completed" ? (
+              <div style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "0.45rem",
+                background: "#ecfdf5",
+                border: "1.5px solid #a7f3d0",
+                padding: "0.45rem 0.85rem",
+                borderRadius: "var(--radius-sm)",
+                fontSize: "0.84rem",
+                color: "#065f46",
+                fontWeight: 600,
+              }}>
+                <CheckCircle2 size={16} color="#059669" />
+                <span>Settlement Sealed (Tenancy Completed)</span>
+              </div>
+            ) : (
+              <button onClick={() => setIsCreateOpen(true)} className="btn btn-primary">
+                <Plus size={16} />
+                <span>Propose New Deduction</span>
+              </button>
+            )
           )}
         </div>
       </div>

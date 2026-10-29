@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { X, ExternalLink, ShieldCheck, Copy, Check, Image as ImageIcon } from 'lucide-react';
+import { X, ExternalLink, ShieldCheck, Image as ImageIcon } from 'lucide-react';
 import { Badge } from './Badge';
 
 export interface PhotoViewerModalProps {
@@ -23,7 +23,6 @@ export const PhotoViewerModal: React.FC<PhotoViewerModalProps> = ({
   condition,
   notes,
 }) => {
-  const [copied, setCopied] = useState(false);
   const [imageLoaded, setImageLoaded] = useState(false);
   const [imageError, setImageError] = useState(false);
 
@@ -41,12 +40,7 @@ export const PhotoViewerModal: React.FC<PhotoViewerModalProps> = ({
 
   if (!isOpen) return null;
 
-  const handleCopyHash = () => {
-    if (!sha256Hash) return;
-    navigator.clipboard.writeText(sha256Hash);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  };
+
 
   return (
     <div
@@ -187,40 +181,20 @@ export const PhotoViewerModal: React.FC<PhotoViewerModalProps> = ({
             <div style={{
               display: 'flex',
               alignItems: 'center',
-              justifyContent: 'space-between',
-              gap: '0.75rem',
-              background: '#ffffff',
-              padding: '0.5rem 0.75rem',
+              gap: '0.5rem',
+              background: '#f0fdf4',
+              padding: '0.55rem 0.85rem',
               borderRadius: '8px',
-              border: '1px solid #e2e8f0',
-              flexWrap: 'wrap',
+              border: '1px solid #bbf7d0',
+              color: '#166534',
+              fontSize: '0.82rem',
+              fontWeight: 600,
             }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', minWidth: 0 }}>
-                <ShieldCheck size={16} color="#059669" style={{ flexShrink: 0 }} />
-                <span style={{ fontSize: '0.74rem', fontWeight: 700, color: '#065f46', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
-                  SHA-256 Hash
-                </span>
-                <span style={{
-                  fontFamily: 'var(--font-mono)',
-                  fontSize: '0.74rem',
-                  color: '#0284c7',
-                  overflow: 'hidden',
-                  textOverflow: 'ellipsis',
-                  whiteSpace: 'nowrap',
-                }}>
-                  {sha256Hash}
-                </span>
-              </div>
-
-              <button
-                type="button"
-                onClick={handleCopyHash}
-                className="btn btn-secondary btn-sm"
-                style={{ fontSize: '0.74rem', padding: '0.25rem 0.55rem' }}
-              >
-                {copied ? <Check size={12} color="#059669" /> : <Copy size={12} />}
-                <span>{copied ? 'Copied' : 'Copy Hash'}</span>
-              </button>
+              <ShieldCheck size={17} color="#059669" style={{ flexShrink: 0 }} />
+              <span>Verified Tamper-Proof Evidence</span>
+              <span style={{ fontSize: '0.74rem', color: '#15803d', fontWeight: 500, marginLeft: 'auto' }}>
+                Cryptographically Secured
+              </span>
             </div>
           )}
         </div>

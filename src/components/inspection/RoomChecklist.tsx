@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import type { RoomItem, ItemCondition } from '../../types';
 import { Badge } from '../common/Badge';
-import { HashBadge } from '../common/HashBadge';
 import { Plus, Clock, Maximize2, Image as ImageIcon, ShieldCheck, Camera, Sliders } from 'lucide-react';
 import { AddRoomItemModal } from './AddRoomItemModal';
 import { AssessRoomItemModal } from './AssessRoomItemModal';
@@ -142,7 +141,7 @@ export const RoomChecklist: React.FC<RoomChecklistProps> = ({
       )}
 
       {/* Move-Out Landlord Walkthrough Banner */}
-      {!isLocked && isLandlord && isMoveOut && (
+      {!isLocked && isLandlord && isMoveOut && items.length > 0 && (
         <div style={{
           padding: '0.75rem 1rem',
           background: '#f0f9ff',
@@ -551,13 +550,32 @@ export const RoomChecklist: React.FC<RoomChecklistProps> = ({
                                         >
                                           <Maximize2 size={18} />
                                         </div>
-                                      </div>
 
-                                      {hash ? (
-                                        <div style={{ maxWidth: '80px' }}>
-                                          <HashBadge hash={hash} prefix="SHA" />
-                                        </div>
-                                      ) : null}
+                                        {hash && (
+                                          <div
+                                            style={{
+                                              position: 'absolute',
+                                              bottom: '4px',
+                                              right: '4px',
+                                              background: 'rgba(15, 23, 42, 0.85)',
+                                              backdropFilter: 'blur(4px)',
+                                              borderRadius: '4px',
+                                              padding: '2px 5px',
+                                              fontSize: '0.62rem',
+                                              fontWeight: 700,
+                                              display: 'flex',
+                                              alignItems: 'center',
+                                              gap: '3px',
+                                              boxShadow: '0 1px 3px rgba(0,0,0,0.3)',
+                                              zIndex: 2,
+                                            }}
+                                            title={`Tamper-Proof SHA-256 Verified:\n${hash}`}
+                                          >
+                                            <ShieldCheck size={10} color="#34d399" />
+                                            <span style={{ color: '#f8fafc' }}>Verified</span>
+                                          </div>
+                                        )}
+                                      </div>
                                     </div>
                                   );
                                 })}

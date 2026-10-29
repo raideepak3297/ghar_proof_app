@@ -3,7 +3,6 @@ import { CheckCircle2, ShieldCheck } from "lucide-react";
 import type { Inspection } from "../../types";
 import { useAuth } from "../../context/AuthContext";
 import { formatDateTime } from "../../utils/formatters";
-import { HashBadge } from "../common/HashBadge";
 
 interface DualSignOffCardProps {
   inspection: Inspection | null;
@@ -93,19 +92,22 @@ export const DualSignOffCard: React.FC<DualSignOffCardProps> = ({ inspection, on
         </div>
       </div>
 
-      {/* Root Hash */}
+      {/* Sealed & Locked Badge */}
       {isLocked && inspection?.rootHash && (
         <div style={{
-          padding: "0.65rem 0.85rem",
-          background: "#f9fafb",
-          border: "1px solid var(--border-medium)",
+          padding: "0.75rem 0.95rem",
+          background: "#f0fdf4",
+          border: "1px solid #bbf7d0",
           borderRadius: "var(--radius-sm)",
           marginBottom: "1rem",
         }}>
-          <div style={{ fontSize: "0.75rem", fontWeight: 600, color: "var(--text-tertiary)", marginBottom: "0.25rem" }}>
-            Root Hash (SHA-256)
+          <div style={{ display: "flex", alignItems: "center", gap: "0.45rem", color: "#166534", fontSize: "0.82rem", fontWeight: 700, marginBottom: "0.2rem" }}>
+            <ShieldCheck size={16} color="#059669" />
+            <span>Cryptographically Sealed & Locked</span>
           </div>
-          <HashBadge hash={inspection.rootHash} prefix="ROOT" full={false} />
+          <div style={{ fontSize: "0.75rem", color: "#15803d", lineHeight: 1.4 }}>
+            Dual sign-off complete. All photos and fixture notes are permanently locked against alterations.
+          </div>
         </div>
       )}
 

@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import type { RoomItem, ItemCondition } from '../../types';
 import { Modal } from '../common/Modal';
 import { Badge } from '../common/Badge';
-import { HashBadge } from '../common/HashBadge';
 import { Upload, AlertCircle, ShieldCheck, Camera } from 'lucide-react';
 import { uploadApi } from '../../api/upload.api';
 import { getPhotoUrl, getPhotoHash, getPhotoName } from '../../utils/photo.util';
@@ -275,10 +274,24 @@ export const AssessRoomItemModal: React.FC<AssessRoomItemModalProps> = ({
                     style={{ width: 44, height: 44, objectFit: 'cover', borderRadius: '4px', border: '1px solid #cbd5e1' }}
                   />
                   <div style={{ flex: 1, minWidth: 0 }}>
-                    <div style={{ fontSize: '0.8rem', fontWeight: 500, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                    <div style={{ fontSize: '0.8rem', fontWeight: 600, color: '#1e293b', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                       {p.fileName}
                     </div>
-                    <HashBadge hash={p.sha256Hash} prefix="SHA-256" />
+                    <div
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '4px',
+                        color: '#059669',
+                        fontSize: '0.73rem',
+                        fontWeight: 600,
+                        marginTop: '2px',
+                      }}
+                      title={`Cryptographic SHA-256 Hash:\n${p.sha256Hash}`}
+                    >
+                      <ShieldCheck size={13} color="#059669" />
+                      <span>Tamper-Proof Encrypted</span>
+                    </div>
                   </div>
                   <button
                     type="button"
